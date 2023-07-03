@@ -13,22 +13,24 @@ export default function GradientGenerator() {
 
   // Funcion que genera el gradiente
   function generateGradient() {
-    const gradient = `linear-gradient(to right, ${colors.join(", ")})`;
+    const gradient = `linear-gradient(45deg, ${colors.join(", ")})`;
     document.body.style.backgroundImage = gradient;
   }
 
   return (
     <div className="gradient-generator">
       <h2>Generador de gradientes</h2>
-      {[...Array(5)].map((_, index) => (
-        <input
-          key={index}
-          className="color-input"
-          type="color"
-          value={colors[index] || ""}
-          onChange={(e) => handleColorChange(index, e.target.value)}
-        />
-      ))}
+      <div className="gradient-preview">
+        {[...Array(5)].map((_, index) => (
+          <input
+            key={index}
+            className="color-input"
+            type="color"
+            value={colors[index] || ""}
+            onChange={(e) => handleColorChange(index, e.target.value)}
+          />
+        ))}
+      </div>
       <button className="generate-button" onClick={generateGradient}>
         Generar
       </button>

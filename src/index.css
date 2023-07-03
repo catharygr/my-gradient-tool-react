@@ -9,7 +9,14 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 20px;
+  margin: 0 auto;
+  max-width: 450px;
+}
+
+.gradient-preview {
+  aspect-ratio: 4 / 2;
+  min-height: 95px;
+  border-radius: 4px;
 }
 
 .color-input {
