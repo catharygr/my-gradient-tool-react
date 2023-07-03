@@ -1,29 +1,38 @@
 import { useState } from "react";
 
+const initialState = {
+  colors: [],
+  backgroundImage: "",
+};
+
 export default function GradientGenerator() {
-  const [colors, setColors] = useState([]);
-  const [backgroundImage, setBackgroundImage] = useState("");
+  const [state, setState] = useState(initialState);
 
   function handleColorChange(index, color) {
-    const newColors = [...colors];
+    const newColors = [...state.colors];
     newColors[index] = color;
-    setColors(newColors);
+    setState({ ...state, colors: newColors });
   }
 
   function generateGradient() {
-    const colorStops = colors.join(", ");
+    const colorStops = state.colors.join(", ");
     const gradient = `linear-gradient(45deg, ${colorStops})`;
-    setBackgroundImage(gradient);
+    setState({ ...state, backgroundImage: gradient });
+  }
+
+  function resetState() {
+    setState(initialState);
   }
 
   return (
     <div>
       <div className="gradient-generator">
         <h2>Generador de gradientes</h2>
+        <div className="actions"></div>
         <div
           className="gradient-preview"
           style={{
-            backgroundImage: backgroundImage,
+            backgroundImage: state.backgroundImage,
           }}
         ></div>
         <div className="color-input">
@@ -31,13 +40,16 @@ export default function GradientGenerator() {
             <input
               key={index}
               type="color"
-              value={colors[index] || ""}
+              value={state.colors[index] || ""}
               onChange={(e) => handleColorChange(index, e.target.value)}
             />
           ))}
         </div>
         <button className="generate-button" onClick={generateGradient}>
           Generar
+        </button>
+        <button className="reset-button" onClick={resetState}>
+          Reiniciar
         </button>
       </div>
     </div>
