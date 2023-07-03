@@ -1,6 +1,7 @@
 import GradientGenerator from "./GradientGenerator";
+
 function App() {
-  <GradientGenerator />;
+  return <GradientGenerator />;
 }
 
 export default App;
