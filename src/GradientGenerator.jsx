@@ -1,39 +1,45 @@
 import { useState } from "react";
 
 export default function GradientGenerator() {
-  <h1>Generador de gradientes</h1>;
   const [colors, setColors] = useState([]);
+  const [backgroundImage, setBackgroundImage] = useState("");
 
-  // Funcion que recibe el index y el color
   function handleColorChange(index, color) {
     const newColors = [...colors];
     newColors[index] = color;
     setColors(newColors);
   }
 
-  // Funcion que genera el gradiente
   function generateGradient() {
-    const gradient = `linear-gradient(45deg, ${colors.join(", ")})`;
-    document.body.style.backgroundImage = gradient;
+    const colorStops = colors.join(", ");
+    const gradient = `linear-gradient(45deg, ${colorStops})`;
+    setBackgroundImage(gradient);
   }
 
   return (
-    <div className="gradient-generator">
-      <h2>Generador de gradientes</h2>
-      <div className="gradient-preview">
-        {[...Array(5)].map((_, index) => (
-          <input
-            key={index}
-            className="color-input"
-            type="color"
-            value={colors[index] || ""}
-            onChange={(e) => handleColorChange(index, e.target.value)}
-          />
-        ))}
+    <div>
+      <div className="gradient-generator">
+        <h2>Generador de gradientes</h2>
+        <div
+          className="gradient-preview"
+          style={{
+            backgroundImage: backgroundImage,
+          }}
+        ></div>
+        <div className="color-input">
+          {[...Array(5)].map((_, index) => (
+            <input
+              key={index}
+              type="color"
+              value={colors[index] || ""}
+              onChange={(e) => handleColorChange(index, e.target.value)}
+            />
+          ))}
+        </div>
+        <button className="generate-button" onClick={generateGradient}>
+          Generar
+        </button>
       </div>
-      <button className="generate-button" onClick={generateGradient}>
-        Generar
-      </button>
     </div>
   );
 }
