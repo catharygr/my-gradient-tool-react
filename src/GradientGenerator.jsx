@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 const initialState = {
-  colors: [],
+  colors: ["#ff0000", "#000C66", "#F8D210", "#BD97CB", "#ECF87F"],
   backgroundImage: "",
 };
 
